@@ -13,6 +13,8 @@ public class App {
 
     private static final Integer number = 6;
 
+    private static final List<String> completedGames = new ArrayList<>();
+
 
     static {
         try {
@@ -28,6 +30,8 @@ public class App {
         System.out.println("Hello world " + randomScore() + " " + number);
         System.out.println(createGames());
         gameResults();
+
+        System.out.println(completedGames);
 
     }
 
@@ -53,6 +57,21 @@ public class App {
         return games;
     }
 
+    public static void completeFixtures(String fixture) {
+        completedGames.add(fixture);
+    }
+
+    public static boolean gameCompleted(String homeTeam, String awayTeam){
+        for (String game: completedGames){
+            if (Objects.equals(game, homeTeam + awayTeam)) {
+                return true;
+            } else if (Objects.equals(game, awayTeam + homeTeam)) return true;
+            }
+        return false;
+    }
+
+
+
     public static void gameResults(){
         int[] teams = numberOfTeams();
         System.out.println(Arrays.toString(teams));
@@ -61,11 +80,13 @@ public class App {
         int [][] a = new int[n][];
 
 
-
-        for (Integer homeTeam : teams) {
+        for (int homeTeam : teams) {
             for (int awayTeam : teams) {
                 if (Objects.equals(homeTeam, awayTeam)) continue;
-                System.out.println(homeTeam + " " + awayTeam + " " + randomScore() + " " + randomScore());
+                if (!gameCompleted(String.valueOf(homeTeam), String.valueOf(awayTeam))) {
+                    completeFixtures(String.valueOf(homeTeam) + String.valueOf(awayTeam));
+                    System.out.println(homeTeam + " " + awayTeam + " " + randomScore() + " " + randomScore());
+                }
             }
         }
 
