@@ -10,13 +10,12 @@ import java.util.stream.IntStream;
 public class App {
     private static final Random rand;
     static Logger logger = Logger.getLogger(App.class.getName());
-
-    private static final Integer number = 6;
-
     private static final List<String> completedGames = new ArrayList<>();
     private static final List<int[]> games = new ArrayList<>();
     private static final List<int[]> gamePoints = new ArrayList<>();
     private static final List<int[]> resultsTable = new ArrayList<>();
+
+
 
 
 
@@ -34,14 +33,23 @@ public class App {
 
         gameResults();
         calcPoints();
-
         generateTable();
+
+//        for (int[] game:resultsTable){
+//            System.out.println(game[4]);
+//            System.out.println(Arrays.toString(game));
+//        }
+
+        resultsTable.sort(Comparator.comparingInt(a -> a[a.length - 1]));
+
         for (int[] game:resultsTable){
             System.out.println(Arrays.toString(game));
         }
 
 
+
     }
+
 
     public static Integer randomScore() {
         return rand.nextInt(5);
