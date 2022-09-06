@@ -5,6 +5,7 @@ import java.security.SecureRandom;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class App {
@@ -14,8 +15,6 @@ public class App {
     private static final List<int[]> games = new ArrayList<>();
     private static final List<int[]> gamePoints = new ArrayList<>();
     private static final List<int[]> resultsTable = new ArrayList<>();
-
-
 
 
 
@@ -35,17 +34,17 @@ public class App {
         calcPoints();
         generateTable();
 
-//        for (int[] game:resultsTable){
-//            System.out.println(game[4]);
-//            System.out.println(Arrays.toString(game));
-//        }
+        resultsTable.sort(Comparator.comparing((int[] a) -> a[a.length - 1]).thenComparing((int[] a) -> a[a.length - 2]));
 
-        resultsTable.sort(Comparator.comparingInt(a -> a[a.length - 1]));
+        ArrayList<Integer> teamRank = new ArrayList<>();
 
         for (int[] game:resultsTable){
+            teamRank.add(game[0]);
             System.out.println(Arrays.toString(game));
         }
 
+        Collections.reverse(teamRank);
+        System.out.println(teamRank);
 
 
     }
