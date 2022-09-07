@@ -14,7 +14,6 @@ public class App {
     private static final List<int[]> games = new ArrayList<>();
     private static final List<int[]> gamePoints = new ArrayList<>();
     private static final List<int[]> resultsTable = new ArrayList<>();
-//    private static final HashMap<String,Integer> createGameResults = new HashMap<>();
 
     static {
         try {
@@ -25,6 +24,9 @@ public class App {
     }
 
     public static void main(String[] args){
+        LeagueOrder league = new LeagueOrder();
+
+        System.out.println(league);
         int number = 6;
 
 //        int[][] games = {
@@ -63,6 +65,7 @@ public class App {
                                 {3, 1, 1, 1},   // Team 3 - Team 1 => 1:1
                                     {4, 0, 2, 0}
         };   // Team 4 - Team 0 => 2:0
+        System.out.println(Arrays.toString(LeagueOrder.computeRanks(6, games)));
 
         System.out.println(Arrays.toString(leagueTable(number, games)));
 
@@ -98,6 +101,14 @@ public class App {
 //        System.out.println(rank);
 
         return rank.stream().mapToInt(i -> i).toArray();
+    }
+
+    static void somethingElse(){
+        Map<Integer, Integer> ranks  = new HashMap<>();
+        for (int[] game:resultsTable){
+            System.out.println(Arrays.toString(game));
+        }
+
     }
 
     static void changeArr(int[] input){
@@ -149,6 +160,28 @@ public class App {
         }
         System.out.println(map + " this is map \n");
 
+//        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+//            if (entry.getValue().equals(0)) {
+//                System.out.println(entry.getKey());
+//            }
+//        }
+        for (int[] game:resultsTable){
+            System.out.println(Arrays.toString(game));
+        }
+
+        System.out.println(Arrays.toString(numberOfTeams(6)) + " teams");
+
+        List<Integer> qqq = new ArrayList<>();
+        for (int game:numberOfTeams(6)){
+            System.out.println(game);
+            for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+                if (entry.getValue().equals(game)) {
+                    System.out.println(entry.getKey() +" this is the key");
+                    qqq.add(entry.getKey());
+                }
+            }
+        }
+        System.out.println(qqq + " this is qqq");
 
     }
 
